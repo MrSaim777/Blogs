@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E1490C62BB7EDF4002126E6 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = 0E1490C52BB7EDF4002126E6 /* Inject */; };
+		0E1490C82BB7F3A3002126E6 /* AuthFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1490C72BB7F3A3002126E6 /* AuthFailedView.swift */; };
+		0E1490CB2BB82AAF002126E6 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1490CA2BB82AAF002126E6 /* ArticleModel.swift */; };
+		0E1490CE2BB82B2A002126E6 /* BlogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1490CD2BB82B2A002126E6 /* BlogViewModel.swift */; };
+		0E1490D02BB8363E002126E6 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1490CF2BB8363E002126E6 /* SearchBarView.swift */; };
+		0E1490D22BB83681002126E6 /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E1490D12BB83681002126E6 /* ArticleView.swift */; };
 		0E2396532BB7BEE900506CA1 /* BlogsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2396522BB7BEE900506CA1 /* BlogsApp.swift */; };
 		0E2396552BB7BEE900506CA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2396542BB7BEE900506CA1 /* ContentView.swift */; };
 		0E2396572BB7BEEB00506CA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E2396562BB7BEEB00506CA1 /* Assets.xcassets */; };
@@ -15,9 +21,16 @@
 		0E2396642BB7C1BB00506CA1 /* BlogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2396632BB7C1BB00506CA1 /* BlogsView.swift */; };
 		0E2396662BB7C24400506CA1 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2396652BB7C24400506CA1 /* ProfileView.swift */; };
 		0E23966E2BB7CD7400506CA1 /* BottomNavViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E23966D2BB7CD7400506CA1 /* BottomNavViewModel.swift */; };
+		0E2396702BB7D23600506CA1 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E23966F2BB7D23600506CA1 /* AuthView.swift */; };
+		0E2396722BB7D24600506CA1 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2396712BB7D24600506CA1 /* AuthViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E1490C72BB7F3A3002126E6 /* AuthFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthFailedView.swift; sourceTree = "<group>"; };
+		0E1490CA2BB82AAF002126E6 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
+		0E1490CD2BB82B2A002126E6 /* BlogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogViewModel.swift; sourceTree = "<group>"; };
+		0E1490CF2BB8363E002126E6 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		0E1490D12BB83681002126E6 /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 		0E23964F2BB7BEE900506CA1 /* Blogs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blogs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E2396522BB7BEE900506CA1 /* BlogsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogsApp.swift; sourceTree = "<group>"; };
 		0E2396542BB7BEE900506CA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -27,6 +40,8 @@
 		0E2396632BB7C1BB00506CA1 /* BlogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogsView.swift; sourceTree = "<group>"; };
 		0E2396652BB7C24400506CA1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		0E23966D2BB7CD7400506CA1 /* BottomNavViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavViewModel.swift; sourceTree = "<group>"; };
+		0E23966F2BB7D23600506CA1 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		0E2396712BB7D24600506CA1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,12 +49,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E1490C62BB7EDF4002126E6 /* Inject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E1490C92BB82A9B002126E6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0E1490CA2BB82AAF002126E6 /* ArticleModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0E2396462BB7BEE900506CA1 = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +83,7 @@
 		0E2396512BB7BEE900506CA1 /* Blogs */ = {
 			isa = PBXGroup;
 			children = (
+				0E1490C92BB82A9B002126E6 /* Models */,
 				0E23966C2BB7CD2D00506CA1 /* View Model */,
 				0E2396602BB7C0E600506CA1 /* Views */,
 				0E2396522BB7BEE900506CA1 /* BlogsApp.swift */,
@@ -100,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				0E2396632BB7C1BB00506CA1 /* BlogsView.swift */,
+				0E1490CF2BB8363E002126E6 /* SearchBarView.swift */,
+				0E1490D12BB83681002126E6 /* ArticleView.swift */,
 			);
 			path = Blogs;
 			sourceTree = "<group>";
@@ -115,6 +142,8 @@
 		0E23966B2BB7C2DE00506CA1 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				0E23966F2BB7D23600506CA1 /* AuthView.swift */,
+				0E1490C72BB7F3A3002126E6 /* AuthFailedView.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -123,6 +152,8 @@
 			isa = PBXGroup;
 			children = (
 				0E23966D2BB7CD7400506CA1 /* BottomNavViewModel.swift */,
+				0E2396712BB7D24600506CA1 /* AuthViewModel.swift */,
+				0E1490CD2BB82B2A002126E6 /* BlogViewModel.swift */,
 			);
 			path = "View Model";
 			sourceTree = "<group>";
@@ -143,6 +174,9 @@
 			dependencies = (
 			);
 			name = Blogs;
+			packageProductDependencies = (
+				0E1490C52BB7EDF4002126E6 /* Inject */,
+			);
 			productName = Blogs;
 			productReference = 0E23964F2BB7BEE900506CA1 /* Blogs.app */;
 			productType = "com.apple.product-type.application";
@@ -171,6 +205,9 @@
 				Base,
 			);
 			mainGroup = 0E2396462BB7BEE900506CA1;
+			packageReferences = (
+				0E1490C42BB7EDF4002126E6 /* XCRemoteSwiftPackageReference "Inject" */,
+			);
 			productRefGroup = 0E2396502BB7BEE900506CA1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -197,11 +234,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E2396702BB7D23600506CA1 /* AuthView.swift in Sources */,
+				0E1490C82BB7F3A3002126E6 /* AuthFailedView.swift in Sources */,
 				0E2396552BB7BEE900506CA1 /* ContentView.swift in Sources */,
 				0E23966E2BB7CD7400506CA1 /* BottomNavViewModel.swift in Sources */,
+				0E1490D02BB8363E002126E6 /* SearchBarView.swift in Sources */,
 				0E2396642BB7C1BB00506CA1 /* BlogsView.swift in Sources */,
+				0E2396722BB7D24600506CA1 /* AuthViewModel.swift in Sources */,
+				0E1490CB2BB82AAF002126E6 /* ArticleModel.swift in Sources */,
+				0E1490CE2BB82B2A002126E6 /* BlogViewModel.swift in Sources */,
 				0E2396662BB7C24400506CA1 /* ProfileView.swift in Sources */,
 				0E2396532BB7BEE900506CA1 /* BlogsApp.swift in Sources */,
+				0E1490D22BB83681002126E6 /* ArticleView.swift in Sources */,
 				0E2396622BB7C12500506CA1 /* BottomNavView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,9 +380,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Blogs/Preview Content\"";
+				DEVELOPMENT_TEAM = RPRVDX6Q8F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Blogs;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "we need this to unlock phone";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -370,9 +416,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Blogs/Preview Content\"";
+				DEVELOPMENT_TEAM = RPRVDX6Q8F;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = Blogs;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "we need this to unlock phone";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -418,6 +466,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0E1490C42BB7EDF4002126E6 /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0E1490C52BB7EDF4002126E6 /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0E1490C42BB7EDF4002126E6 /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0E2396472BB7BEE900506CA1 /* Project object */;
 }

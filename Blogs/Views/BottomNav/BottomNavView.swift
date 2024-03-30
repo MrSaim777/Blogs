@@ -1,10 +1,3 @@
-//
-//  BottomNavView.swift
-//  Blogs
-//
-//  Created by Usama Sultan on 30/03/2024.
-//
-
 import  SwiftUI
 
 struct BottomNavView: View {
@@ -15,8 +8,13 @@ struct BottomNavView: View {
                    BlogsView().tag(Tab.blogs)
                    ProfileView().tag(Tab.profile)
                }
-               .accentColor(.red)
-               .navigationBarTitle("Blogs", displayMode: .inline)
+               .navigationBarTitle("Blogs", displayMode: .large)
+               .tint(.black)
+                      .onAppear {
+                          let tabBarAppearance = UITabBarAppearance()
+                          tabBarAppearance.backgroundColor = .tertiarySystemFill
+                          UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+                      }
            }
            
        }
