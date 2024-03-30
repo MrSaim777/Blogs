@@ -11,6 +11,10 @@
 		0E2396552BB7BEE900506CA1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2396542BB7BEE900506CA1 /* ContentView.swift */; };
 		0E2396572BB7BEEB00506CA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E2396562BB7BEEB00506CA1 /* Assets.xcassets */; };
 		0E23965A2BB7BEEB00506CA1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E2396592BB7BEEB00506CA1 /* Preview Assets.xcassets */; };
+		0E2396622BB7C12500506CA1 /* BottomNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2396612BB7C12500506CA1 /* BottomNavView.swift */; };
+		0E2396642BB7C1BB00506CA1 /* BlogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2396632BB7C1BB00506CA1 /* BlogsView.swift */; };
+		0E2396662BB7C24400506CA1 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2396652BB7C24400506CA1 /* ProfileView.swift */; };
+		0E23966E2BB7CD7400506CA1 /* BottomNavViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E23966D2BB7CD7400506CA1 /* BottomNavViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +23,10 @@
 		0E2396542BB7BEE900506CA1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0E2396562BB7BEEB00506CA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E2396592BB7BEEB00506CA1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0E2396612BB7C12500506CA1 /* BottomNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavView.swift; sourceTree = "<group>"; };
+		0E2396632BB7C1BB00506CA1 /* BlogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogsView.swift; sourceTree = "<group>"; };
+		0E2396652BB7C24400506CA1 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		0E23966D2BB7CD7400506CA1 /* BottomNavViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +59,8 @@
 		0E2396512BB7BEE900506CA1 /* Blogs */ = {
 			isa = PBXGroup;
 			children = (
+				0E23966C2BB7CD2D00506CA1 /* View Model */,
+				0E2396602BB7C0E600506CA1 /* Views */,
 				0E2396522BB7BEE900506CA1 /* BlogsApp.swift */,
 				0E2396542BB7BEE900506CA1 /* ContentView.swift */,
 				0E2396562BB7BEEB00506CA1 /* Assets.xcassets */,
@@ -65,6 +75,56 @@
 				0E2396592BB7BEEB00506CA1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0E2396602BB7C0E600506CA1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0E23966B2BB7C2DE00506CA1 /* Auth */,
+				0E2396692BB7C2AB00506CA1 /* BottomNav */,
+				0E2396682BB7C2A300506CA1 /* Blogs */,
+				0E2396672BB7C28900506CA1 /* Profile */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0E2396672BB7C28900506CA1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0E2396652BB7C24400506CA1 /* ProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		0E2396682BB7C2A300506CA1 /* Blogs */ = {
+			isa = PBXGroup;
+			children = (
+				0E2396632BB7C1BB00506CA1 /* BlogsView.swift */,
+			);
+			path = Blogs;
+			sourceTree = "<group>";
+		};
+		0E2396692BB7C2AB00506CA1 /* BottomNav */ = {
+			isa = PBXGroup;
+			children = (
+				0E2396612BB7C12500506CA1 /* BottomNavView.swift */,
+			);
+			path = BottomNav;
+			sourceTree = "<group>";
+		};
+		0E23966B2BB7C2DE00506CA1 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		0E23966C2BB7CD2D00506CA1 /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				0E23966D2BB7CD7400506CA1 /* BottomNavViewModel.swift */,
+			);
+			path = "View Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +198,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E2396552BB7BEE900506CA1 /* ContentView.swift in Sources */,
+				0E23966E2BB7CD7400506CA1 /* BottomNavViewModel.swift in Sources */,
+				0E2396642BB7C1BB00506CA1 /* BlogsView.swift in Sources */,
+				0E2396662BB7C24400506CA1 /* ProfileView.swift in Sources */,
 				0E2396532BB7BEE900506CA1 /* BlogsApp.swift in Sources */,
+				0E2396622BB7C12500506CA1 /* BottomNavView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,11 +338,13 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Blogs/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Blogs;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -286,9 +352,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.blogs.Blogs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -302,11 +372,13 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Blogs/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Blogs;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -314,9 +386,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.blogs.Blogs;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
