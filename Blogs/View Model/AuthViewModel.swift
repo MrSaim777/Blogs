@@ -1,18 +1,11 @@
-//
-//  AuthViewModel.swift
-//  Blogs
-//
-//  Created by Usama Sultan on 30/03/2024.
-//
-
 import Foundation
 import LocalAuthentication
+import UIKit
 
 class AuthViewModel: ObservableObject {
     
     @Published var isAuthenticated = false
-    @Published var isInitialized = false
-    
+    @Published var isInitialized = false    
 
     func isBiometricAvailable() -> Bool {
         let context = LAContext()

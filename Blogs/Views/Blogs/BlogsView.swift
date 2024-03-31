@@ -4,7 +4,7 @@ struct BlogsView: View {
     @StateObject private var viewModel = BlogViewModel()
     
     var body: some View {
-        VStack {
+        NavigationView{ VStack {
             ScrollView {
                 SearchBar(text: $viewModel.searchText)
                     .padding(.horizontal)
@@ -30,7 +30,7 @@ struct BlogsView: View {
                         }
                     }
                     .padding()
-                    //                }
+                    //  ]              }
                 }
             }
         }
@@ -39,11 +39,11 @@ struct BlogsView: View {
         }
         .onChange(of: viewModel.selectedCatIndex) { _ in
             viewModel.filterArticlesCatIndex()
-        }
-        .tabItem {
-            Image(systemName: "house")
-            Text("Home")
-        }
+        }.navigationBarTitle("Blogs", displayMode: .large)
+            }.tabItem {
+                Image(systemName: "house")
+                Text("Home")
+            }
     }
 }
 

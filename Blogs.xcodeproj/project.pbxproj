@@ -45,6 +45,9 @@
 		0E836D372BB93E9D00B1FC3E /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0E836D362BB93E9D00B1FC3E /* FirebaseRemoteConfigSwift */; };
 		0E836D392BB93E9D00B1FC3E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 0E836D382BB93E9D00B1FC3E /* FirebaseStorage */; };
 		0E836D3B2BB93E9D00B1FC3E /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 0E836D3A2BB93E9D00B1FC3E /* FirebaseStorageCombine-Community */; };
+		0E836D3F2BB96F1800B1FC3E /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E836D3E2BB96F1700B1FC3E /* ProfileViewModel.swift */; };
+		0E836D442BB9765D00B1FC3E /* ImagePickerUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E836D432BB9765D00B1FC3E /* ImagePickerUtil.swift */; };
+		0E836D482BB994E200B1FC3E /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E836D472BB994E200B1FC3E /* ProfileModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +68,9 @@
 		0E23966F2BB7D23600506CA1 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		0E2396712BB7D24600506CA1 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		0E6F78D72BB9223D00A3B93A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0E836D3E2BB96F1700B1FC3E /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		0E836D432BB9765D00B1FC3E /* ImagePickerUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerUtil.swift; sourceTree = "<group>"; };
+		0E836D472BB994E200B1FC3E /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				0E1490CA2BB82AAF002126E6 /* ArticleModel.swift */,
+				0E836D472BB994E200B1FC3E /* ProfileModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -127,6 +134,8 @@
 		0E2396512BB7BEE900506CA1 /* Blogs */ = {
 			isa = PBXGroup;
 			children = (
+				0E836D492BB9977400B1FC3E /* Network */,
+				0E836D422BB9764600B1FC3E /* Utilities */,
 				0E1490C92BB82A9B002126E6 /* Models */,
 				0E23966C2BB7CD2D00506CA1 /* View Model */,
 				0E2396602BB7C0E600506CA1 /* Views */,
@@ -199,8 +208,24 @@
 				0E23966D2BB7CD7400506CA1 /* BottomNavViewModel.swift */,
 				0E2396712BB7D24600506CA1 /* AuthViewModel.swift */,
 				0E1490CD2BB82B2A002126E6 /* BlogViewModel.swift */,
+				0E836D3E2BB96F1700B1FC3E /* ProfileViewModel.swift */,
 			);
 			path = "View Model";
+			sourceTree = "<group>";
+		};
+		0E836D422BB9764600B1FC3E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0E836D432BB9765D00B1FC3E /* ImagePickerUtil.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		0E836D492BB9977400B1FC3E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,13 +332,16 @@
 				0E23966E2BB7CD7400506CA1 /* BottomNavViewModel.swift in Sources */,
 				0E1490D02BB8363E002126E6 /* SearchBarView.swift in Sources */,
 				0E2396642BB7C1BB00506CA1 /* BlogsView.swift in Sources */,
+				0E836D3F2BB96F1800B1FC3E /* ProfileViewModel.swift in Sources */,
 				0E2396722BB7D24600506CA1 /* AuthViewModel.swift in Sources */,
 				0E1490CB2BB82AAF002126E6 /* ArticleModel.swift in Sources */,
+				0E836D442BB9765D00B1FC3E /* ImagePickerUtil.swift in Sources */,
 				0E1490CE2BB82B2A002126E6 /* BlogViewModel.swift in Sources */,
 				0E2396662BB7C24400506CA1 /* ProfileView.swift in Sources */,
 				0E2396532BB7BEE900506CA1 /* BlogsApp.swift in Sources */,
 				0E1490D22BB83681002126E6 /* ArticleView.swift in Sources */,
 				0E2396622BB7C12500506CA1 /* BottomNavView.swift in Sources */,
+				0E836D482BB994E200B1FC3E /* ProfileModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
