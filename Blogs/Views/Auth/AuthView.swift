@@ -1,11 +1,5 @@
 //
-//  AuthView.swift
-//  Blogs
-//
-//  Created by Usama Sultan on 30/03/2024.
-//
-
-import Foundation
+//  AuthView.swiftimport Foundation
 import SwiftUI
 
 struct AuthView: View {
