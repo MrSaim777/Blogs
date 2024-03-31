@@ -4,7 +4,8 @@ struct BlogsView: View {
     @StateObject private var viewModel = BlogViewModel()
     
     var body: some View {
-            VStack {
+        VStack {
+            ScrollView {
                 SearchBar(text: $viewModel.searchText)
                     .padding(.horizontal)
                     .padding(.vertical, 8)
@@ -15,22 +16,34 @@ struct BlogsView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
-                ScrollView {
+                
+                if viewModel.isLoadingArticles {
+                    Spacer()
+                    ProgressView()
+                        .padding()
+                    Spacer()
+                } else {
+                    //                ScrollView {
                     VStack(spacing: 20) {
                         ForEach(viewModel.filteredArticles) { article in
                             ArticleView(article: article)
                         }
                     }
                     .padding()
+                    //                }
                 }
-            }.onChange(of: viewModel.searchText, perform: { _ in
-                viewModel.filterArticles()
-            }).onChange(of: viewModel.selectedCatIndex, perform: { _ in
-                viewModel.filterArticlesCatIndex()
-            }).tabItem {
-                Image(systemName: "house")
-                Text("Home")
             }
+        }
+        .onChange(of: viewModel.searchText) { _ in
+            viewModel.filterArticles()
+        }
+        .onChange(of: viewModel.selectedCatIndex) { _ in
+            viewModel.filterArticlesCatIndex()
+        }
+        .tabItem {
+            Image(systemName: "house")
+            Text("Home")
+        }
     }
 }
 

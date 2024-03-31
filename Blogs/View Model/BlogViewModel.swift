@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Firebase
 
 class BlogViewModel: ObservableObject {
     @Published  var selectedFilterIndex = 0
@@ -17,22 +18,63 @@ class BlogViewModel: ObservableObject {
     // Add more properties as needed for user metadata, authentication, etc.
     let categoriesOptions = ["All", "Trending", "Latest"]
     let filterOptions = ["Title", "Auther", "Content"]
-    
-    enum Cat{
-       case latest,trending,news
-    }
+    let db = Firestore.firestore()
+    let articleCollection = Firestore.firestore().collection("articles");
+    @Published var isLoadingArticles = false
     
     init() {
-        self.articles = [
-            Article(title: "New modalities in models for healthcare", content: "Medicine is a multimodal discipline; it’s made up of different types of information stored across formats — like radiology images, lab results, genomics data, environmental context and more. To get a fuller understanding of a person’s health, we need to build technology that understands all of this information.We’re bringing new capabilities to our models with the hope of making generative AI more helpful to healthcare organizations and people’s health. We just introduced MedLM for Chest X-ray, which has the potential to help transform radiology workflows by helping with the classification of chest X-rays for a variety of use cases. We’re starting with Chest X-rays because they are critical in detecting lung and heart conditions. MedLM for Chest X-ray is now available to trusted testers in an experimental preview on Google Cloud.", author: "Usama Sultan", publicationDate: Date(), category: "Latest", tags: ["Latest", "AI","Health"], imageURL: URL(string: "https://cdn.pixabay.com/photo/2015/05/31/10/55/man-791049_640.jpg")),
-            Article(title: "Title 2", content: "Content 2", author: "Author 2", publicationDate: Date(), category: "Latest", tags: ["Tag1", "Tag3"]),
-            Article(title: "Title 1", content: "Content 1", author: "Author 1", publicationDate: Date(), category: "News", tags: ["Tag1", "Tag2"], imageURL: URL(string: "https://cdn.pixabay.com/photo/2015/05/31/10/55/man-791049_640.jpg")),
-            Article(title: "Title 2", content: "Content 2", author: "Author 2", publicationDate: Date(), category: "Trending", tags: ["Tag1", "Tag3"]),
-        ]
-        self.filteredArticles = articles
+        self.getArticles()
     }
+    
+    func getArticles() {
+            isLoadingArticles = true
+            articleCollection.getDocuments { [weak self] snapshot, error in
+                guard let self = self else { return }
+                defer {
+                    self.isLoadingArticles = false
+                }
+                
+                if let error = error {
+                    // Handle the error
+                    print("Error getting documents: \(error)")
+                    return
+                }
+                
+                if let snapshot = snapshot {
+                    DispatchQueue.main.async {
+                        self.articles = snapshot.documents.compactMap { document in
+                            guard
+//                                   let id = document.documentID as? String,
+                                   let title = document["title"] as? String,
+                                   let content = document["content"] as? String,
+                                   let author = document["author"] as? String,
+                                   let category = document["category"] as? String,
+                                   let tags = document["tags"] as? [String]
+                               else {
+                                   return nil
+                               }
 
-    // Function to filter articles based on search text
+                               // Create Article instance using retrieved data
+                               let imageURL = document["imageURL"] as? String
+                               let imageURLURL = imageURL.flatMap { URL(string: $0) }
+                               
+                               return Article(
+                                id: document.documentID,
+                                title: title,
+                                content: content,
+                                author: author,
+                                category: category,
+                                tags: tags,
+                                imageURL: imageURLURL
+                            )
+                        }
+                        self.filteredArticles = self.articles
+                    }
+                }
+            }
+        }
+    
+       
     func filterArticles() {
         if searchText.isEmpty {
             filteredArticles = articles
