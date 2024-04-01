@@ -4,8 +4,8 @@ struct BlogsView: View {
     @StateObject private var viewModel = BlogViewModel()
     
     var body: some View {
-        NavigationView{ VStack {
-            ScrollView {
+        NavigationView{ VStack(spacing: 30) {
+            ScrollView(showsIndicators: false) {
                 SearchBar(text: $viewModel.searchText)
                     .padding(.horizontal)
                     .padding(.vertical, 8)
@@ -23,14 +23,11 @@ struct BlogsView: View {
                         .padding()
                     Spacer()
                 } else {
-                    //                ScrollView {
-                    VStack(spacing: 20) {
+                    VStack() {
                         ForEach(viewModel.filteredArticles) { article in
                             ArticleView(article: article)
                         }
-                    }
-                    .padding()
-                    //  ]              }
+                    }.padding(.top, 4)
                 }
             }
         }
@@ -42,7 +39,7 @@ struct BlogsView: View {
         }.navigationBarTitle("Blogs", displayMode: .large)
             }.tabItem {
                 Image(systemName: "house")
-                Text("Home")
+                Text("Blogs")
             }
     }
 }

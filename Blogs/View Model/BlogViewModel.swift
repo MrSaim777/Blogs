@@ -9,7 +9,7 @@ class BlogViewModel: ObservableObject {
     @Published var filteredArticles: [Article] = []
     @Published var searchText: String = ""
     // Add more properties as needed for user metadata, authentication, etc.
-    let categoriesOptions = ["All", "Trending", "Latest"]
+    let categoriesOptions = ["All", "News", "Sports","Health","Food"]
     let filterOptions = ["Title", "Auther", "Content"]
     let db = Firestore.firestore()
     let articleCollection = Firestore.firestore().collection("articles");

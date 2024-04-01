@@ -8,7 +8,7 @@
 import Foundation
 
 enum Tab {
-        case blogs, profile
+        case blogs,add, profile
     }
 
 class BottomNavViewModel: ObservableObject {

@@ -5,27 +5,26 @@ struct ArticleView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-                if let imageURL = article.imageURL {
-                    AsyncImage(url: imageURL) 
-                    { image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(height: 200)
-                            .cornerRadius(8)
-                    } placeholder: {
-                        Color.gray
-                            .frame(height: 200)
-                            .cornerRadius(8)
-                    }
+            if let imageURL = article.imageURL {
+                AsyncImage(url: imageURL) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 310)
+                        .frame(height: 200)
+                        .cornerRadius(8)
+                } placeholder: {
+                    Color.gray
+                        .frame(width: 310)
+                        .frame(height: 200)
+                        .cornerRadius(8)
                 }
+                .clipped()
+            }
             Text(article.title)
                 .font(.title)
                 .fontWeight(.bold)
-//            Text("By \(article.author) • \(article.publicationDate)")
-//                .foregroundColor(.gray)
             Text(article.content)
-//                .lineLimit(3)
                 .font(.body)
                 .foregroundColor(.secondary)
             HStack {
@@ -34,7 +33,7 @@ struct ArticleView: View {
                         .font(.caption)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 4)
-                        .background(.black)
+                        .background(Color.black)
                         .foregroundColor(.white)
                         .cornerRadius(5)
                 }
@@ -45,6 +44,8 @@ struct ArticleView: View {
         .padding()
         .background(Color.white)
         .cornerRadius(10)
+        .frame(width: 310, alignment: .center)
         .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+        .padding(.vertical, 8)
     }
 }
