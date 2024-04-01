@@ -4,32 +4,33 @@ struct BlogsView: View {
     @StateObject private var viewModel = BlogViewModel()
     
     var body: some View {
-        NavigationView{ VStack(spacing: 30) {
-            ScrollView(showsIndicators: false) {
-                SearchBar(text: $viewModel.searchText)
+        NavigationView{
+            VStack(spacing: 30) {
+                ScrollView(showsIndicators: false) {
+                    SearchBar(text: $viewModel.searchText)
+                        .padding(.horizontal)
+                        .padding(.vertical, 8)
+                    Picker(selection: $viewModel.selectedCatIndex, label: Text("Category:")) {
+                        ForEach(0 ..< viewModel.categoriesOptions.count) {
+                            Text(viewModel.categoriesOptions[$0])
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
                     .padding(.horizontal)
-                    .padding(.vertical, 8)
-                Picker(selection: $viewModel.selectedCatIndex, label: Text("Category:")) {
-                    ForEach(0 ..< viewModel.categoriesOptions.count) {
-                        Text(viewModel.categoriesOptions[$0])
+                    
+                    if viewModel.isLoadingArticles {
+                        Spacer()
+                        ProgressView()
+                            .padding()
+                        Spacer()
+                    } else {
+                        VStack() {
+                            ForEach(viewModel.filteredArticles) { article in
+                                ArticleView(article: article)
+                            }
+                        }.padding(.top, 4)
                     }
                 }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.horizontal)
-                
-                if viewModel.isLoadingArticles {
-                    Spacer()
-                    ProgressView()
-                        .padding()
-                    Spacer()
-                } else {
-                    VStack() {
-                        ForEach(viewModel.filteredArticles) { article in
-                            ArticleView(article: article)
-                        }
-                    }.padding(.top, 4)
-                }
-            }
         }
         .onChange(of: viewModel.searchText) { _ in
             viewModel.filterArticles()

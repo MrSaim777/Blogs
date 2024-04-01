@@ -4,7 +4,6 @@ import FirebaseStorage
 
 class ImageUploader: ObservableObject {
     @Published var imageURL: URL?
-//    @Published var uploadProgress: Double = 0.0
     
     func getUID() -> String {
         if let currentUser = Auth.auth().currentUser {
@@ -29,26 +28,6 @@ class ImageUploader: ObservableObject {
          }
      }
 
-    
-//    func addImageToFirestore(imageURL: String,uid: String) {
-//        let db = Firestore.firestore()
-//        let userRef = db.collection("users").document(uid)
-//
-//        let profileViewModel = ProfileViewModel()
-//
-//        var userData: [String: Any] = [
-//            "imageURL": ""
-//        ]
-//
-//        userRef.setData(userData) { error in
-//            if let error = error {
-//                print("Error adding user to Firestore: \(error)")
-//            } else {
-//                profileViewModel.showAlert = true
-//                print("User added to Firestore successfully")
-//            }
-//        }
-//    }
 
     func uploadImage(_ image: UIImage) {
         guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }

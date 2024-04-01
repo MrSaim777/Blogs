@@ -19,6 +19,35 @@ class BlogViewModel: ObservableObject {
         self.getArticles()
     }
     
+    func addBlogArticle(title: String, content: String, author: String, category: String, tags: [String], imageURL: URL?) {
+        isLoadingArticles = true
+        let articleRef = Firestore.firestore().collection("articles").document()
+
+        var articleData: [String: Any] = [
+            "id": articleRef.documentID,
+            "title": title,
+            "content": content,
+            "author": author,
+            "category": category,
+            "tags": tags
+        ]
+
+        if let imageURL = imageURL {
+            articleData["imageURL"] = imageURL.absoluteString
+        }
+
+        articleRef.setData(articleData) { error in
+            self.isLoadingArticles = false
+            if let error = error {
+                print("Error adding document: \(error)")
+            } else {
+                print("Document added with ID: \(articleRef.documentID)")
+                self.getArticles()
+            }
+        }
+    }
+
+    
     func getArticles() {
             isLoadingArticles = true
             articleCollection.getDocuments { [weak self] snapshot, error in
@@ -122,6 +151,15 @@ class BlogViewModel: ObservableObject {
         case 2:
             filteredArticles = articles.filter { article in
                 article.category.localizedCaseInsensitiveContains(categoriesOptions[2])
+            }
+        case 3:
+            filteredArticles = articles.filter { article in
+                article.category.localizedCaseInsensitiveContains(categoriesOptions[3])
+                
+            }
+        case 4:
+            filteredArticles = articles.filter { article in
+                article.category.localizedCaseInsensitiveContains(categoriesOptions[4])
             }
         default:
             break
