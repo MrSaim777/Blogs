@@ -10,13 +10,11 @@ struct AddView: View {
     //       @State  var tags = ""
     @State private var isShowingImagePicker = false
     @ObservedObject private var viewModel = AddViewModel()
-    @ObservedObject private var blogViewModel = BlogViewModel()
     let categories = [ "News", "Sports","Health","Food"]
     
     @State private var id: String
     @State private var title: String
     @State private var content: String
-    //     @State private var selectedCategoryIndex: Int
     @State private var category: String = "News"
     @State private var tags: String
     
@@ -68,7 +66,8 @@ struct AddView: View {
                     Picker(selection: $category, label: Text("Category")) {
                         ForEach(categories, id: \.self) {
                             Text($0)
-                        }}
+                        }
+                    }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding(.vertical,4)
                     
@@ -77,14 +76,14 @@ struct AddView: View {
                         .background(Color(UIColor.systemGray6))
                         .cornerRadius(10)
                         .padding(.vertical,4)
-                }
-                if viewModel.isLoadingArticles{
-                    Spacer()
-                    ProgressView()
-                        .padding()
-                    Spacer()
-                }
-            }
+                            }
+                            if viewModel.isLoadingArticles{
+                                Spacer()
+                                ProgressView()
+                                    .padding()
+                                Spacer()
+                            }
+                        }
                         .padding()
                         .navigationBarTitle("Add Article")
                         .navigationBarItems(trailing:
@@ -106,7 +105,6 @@ struct AddView: View {
                         }
                         .onChange(of: viewModel.saved) { saved in
                             if saved {
-                                blogViewModel.getArticles()
                                 title = ""
                                 content = ""
                                 category = ""

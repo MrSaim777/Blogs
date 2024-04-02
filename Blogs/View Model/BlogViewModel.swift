@@ -3,50 +3,47 @@ import SwiftUI
 import Firebase
 
 class BlogViewModel: ObservableObject {
-    @Published  var selectedFilterIndex = 0
-    @Published  var selectedCatIndex = 0
-    @Published var articles: [Article] = []
-    @Published var filteredArticles: [Article] = []
-    @Published var searchText: String = ""
-    // Add more properties as needed for user metadata, authentication, etc.
-    let categoriesOptions = ["All", "News", "Sports","Health","Food"]
-    let filterOptions = ["Title", "Auther", "Content"]
-    let db = Firestore.firestore()
-    let articleCollection = Firestore.firestore().collection("articles");
-    @Published var isLoadingArticles = false
-    
-    init() {
-        self.getArticles()
-    }
-    
-//    func addBlogArticle(title: String, content: String, author: String, category: String, tags: [String], imageURL: URL?) {
-//        isLoadingArticles = true
-//        let articleRef = Firestore.firestore().collection("articles").document()
-//
-//        var articleData: [String: Any] = [
-//            "id": articleRef.documentID,
-//            "title": title,
-//            "content": content,
-//            "author": author,
-//            "category": category,
-//            "tags": tags
-//        ]
-//
-//        if let imageURL = imageURL {
-//            articleData["imageURL"] = imageURL.absoluteString
-//        }
-//
-//        articleRef.setData(articleData) { error in
-//            self.isLoadingArticles = false
-//            if let error = error {
-//                print("Error adding document: \(error)")
-//            } else {
-//                print("Document added with ID: \(articleRef.documentID)")
-//                self.getArticles()
-//            }
-//        }
+//    @Published  var selectedFilterIndex = 0
+//    @Published  var selectedCatIndex = 0
+//    @Published var articles: [Article] = []
+//    @Published var filteredArticles: [Article] = []
+//    @Published var searchText: String = ""
+//    // Add more properties as needed for user metadata, authentication, etc.
+//    let categoriesOptions = ["All", "News", "Sports","Health","Food"]
+//    let filterOptions = ["Title", "Auther", "Content"]
+//    let db = Firestore.firestore()
+//    let articleCollection = Firestore.firestore().collection("articles");
+//    @Published var isLoadingArticles = false
+//    
+//    init() {
+//        self.getArticles()
 //    }
-
+    
+    @Published var selectedFilterIndex = 0
+      @Published var selectedCatIndex = 0
+      @Published var articles: [Article] = []
+      @Published var filteredArticles: [Article] = []
+      @Published var searchText: String = ""
+      let categoriesOptions = ["All", "News", "Sports","Health","Food"]
+      let filterOptions = ["Title", "Auther", "Content"]
+      let db = Firestore.firestore()
+      let articleCollection = Firestore.firestore().collection("articles")
+      @Published var isLoadingArticles = false
+      
+      init(selectedFilterIndex: Int = 0,
+           selectedCatIndex: Int = 0,
+           articles: [Article] = [],
+           filteredArticles: [Article] = [],
+           searchText: String = "",
+           isLoadingArticles: Bool = false) {
+          self.selectedFilterIndex = selectedFilterIndex
+          self.selectedCatIndex = selectedCatIndex
+          self.articles = articles
+          self.filteredArticles = filteredArticles
+          self.searchText = searchText
+          self.isLoadingArticles = isLoadingArticles
+          self.getArticles()
+      }
     
     func getArticles() {
             isLoadingArticles = true

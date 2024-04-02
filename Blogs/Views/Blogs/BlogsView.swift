@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct BlogsView: View {
-    @StateObject private var viewModel = BlogViewModel()
+    @ObservedObject  var viewModel = BlogViewModel()
     
     var body: some View {
         NavigationView{
