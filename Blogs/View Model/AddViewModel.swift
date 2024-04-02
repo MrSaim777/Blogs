@@ -1,12 +1,17 @@
 import Foundation
 import SwiftUI
 import FirebaseStorage
+import Firebase
 
 class AddViewModel: ObservableObject{
     
     @Published var selectedImage: UIImage?
     @Published var imageURL: String = ""
-   
+    @Published var isLoadingArticles = false
+    @Published var alert = false
+    @Published var saved = false
+    
+    
     
     func generateRandomUserID() -> String {
         let uuid = UUID().uuidString
@@ -47,4 +52,63 @@ class AddViewModel: ObservableObject{
             }
         }
     }
+    
+    func saveArticleToFirestore(title: String, content: String, category: String, tags: [String]) {
+        guard !title.isEmpty, !content.isEmpty, !category.isEmpty, !imageURL.isEmpty else {
+            print("Error: One or more required parameters are empty.")
+            self.alert = true
+            return
+        }
+
+        addBlogArticle(title: title, content: content, category: category, tags: tags, imageURL: imageURL) { documentID in
+            if let documentID = documentID {
+                self.saved = true
+                print("Article added with document ID: \(documentID)")
+            } else {
+                print("Failed to add article.")
+            }
+        }
+    }
+
+    
+    func addBlogArticle(title: String, content: String, category: String, tags: [String], imageURL: String, completion: @escaping (String?) -> Void) {
+        // Set loading state to true while adding the article
+        isLoadingArticles = true
+
+        // Create a reference to the Firestore collection where articles are stored
+        let articleRef = Firestore.firestore().collection("articles").document()
+
+        // Create data dictionary to be added to Firestore
+        let articleData: [String: Any] = [
+            "id": articleRef.documentID,
+            "title": title,
+            "content": content,
+            "author": "",
+            "category": category,
+            "tags": tags,
+            "imageURL": imageURL
+        ]
+        
+
+        // Add the data to Firestore
+        articleRef.setData(articleData) { error in
+            // Set loading state to false after adding the article
+            self.isLoadingArticles = false
+
+            if let error = error {
+                // Handle the error
+                print("Error adding document: \(error)")
+                completion(nil) // Call completion handler with nil to indicate failure
+            } else {
+                // Article added successfully
+                print("Document added with ID: \(articleRef.documentID)")
+
+                // Call completion handler with document ID
+                completion(articleRef.documentID)
+
+//                BlogViewModel().getArticles()
+            }
+        }
+    }
+
 }

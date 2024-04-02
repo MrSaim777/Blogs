@@ -5,7 +5,7 @@ struct BottomNavView: View {
     var body: some View {
                TabView(selection: $viewModel.selectedTab) {
                    BlogsView().tag(Tab.blogs)
-                   AddView().tag(Tab.add)
+                   AddView(id: "", title: "", content: "", category: "", tags: "").tag(Tab.add)
                    ProfileView().tag(Tab.profile)
                }
                .tint(.black)
