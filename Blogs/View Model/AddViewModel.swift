@@ -10,6 +10,8 @@ class AddViewModel: ObservableObject{
     @Published var isLoadingArticles = false
     @Published var alert = false
     @Published var saved = false
+    @Published var deleted = false
+    @Published var isDeleted = false
     
     
     
@@ -72,13 +74,10 @@ class AddViewModel: ObservableObject{
 
     
     func addBlogArticle(title: String, content: String, category: String, tags: [String], imageURL: String, completion: @escaping (String?) -> Void) {
-        // Set loading state to true while adding the article
         isLoadingArticles = true
 
-        // Create a reference to the Firestore collection where articles are stored
         let articleRef = Firestore.firestore().collection("articles").document()
 
-        // Create data dictionary to be added to Firestore
         let articleData: [String: Any] = [
             "id": articleRef.documentID,
             "title": title,
@@ -89,26 +88,62 @@ class AddViewModel: ObservableObject{
             "imageURL": imageURL
         ]
         
-
-        // Add the data to Firestore
         articleRef.setData(articleData) { error in
-            // Set loading state to false after adding the article
             self.isLoadingArticles = false
 
             if let error = error {
-                // Handle the error
                 print("Error adding document: \(error)")
-                completion(nil) // Call completion handler with nil to indicate failure
+                completion(nil)
             } else {
-                // Article added successfully
                 print("Document added with ID: \(articleRef.documentID)")
 
-                // Call completion handler with document ID
                 completion(articleRef.documentID)
 
-//                BlogViewModel().getArticles()
             }
         }
     }
+    
+    func updateBlogArticle(articleID: String, title: String, content: String, category: String, tags: [String], imageURL: String) {
+        isLoadingArticles = true
+
+        let articleRef = Firestore.firestore().collection("articles").document(articleID)
+
+        let updatedData: [String: Any] = [
+            "title": title,
+            "content": content,
+            "category": category,
+            "tags": tags,
+            "imageURL": self.imageURL == "" ? imageURL : self.imageURL
+        ]
+
+        articleRef.updateData(updatedData) { error in
+            self.isLoadingArticles = false
+
+            if let error = error {
+                print("Error updating document: \(error)")
+            } else {
+                print("Document updated with ID: \(articleID)")
+                self.saved = true
+            }
+        }
+    }
+    
+    func deleteBlogArticle(articleID: String) {
+        isLoadingArticles = true
+        
+        let articleRef = Firestore.firestore().collection("articles").document(articleID)
+        
+        articleRef.delete { error in
+            self.isLoadingArticles = false
+            
+            if let error = error {
+                print("Error deleting document: \(error)")
+            } else {
+                self.deleted = true
+                print("Document deleted with ID: \(articleID)")
+            }
+        }
+    }
+
 
 }

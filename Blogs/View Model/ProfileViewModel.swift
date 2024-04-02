@@ -33,24 +33,17 @@ class ProfileViewModel: ObservableObject {
         }
     }
 
-    func addUserToFirestore(
-//        uid: String, username: String, email: String, phone: String,
-//        imageURL: URL?
-    ) {
+    func addUserToFirestore() {
         let db = Firestore.firestore()
         let userRef = db.collection("users").document(self.id)
         
-        var userData: [String: Any] = [
+        let userData: [String: Any] = [
             "id": self.id,
             "username": self.username,
             "email": self.email,
             "phone": self.phoneNumber,
-            "imageURL": ""
+            "imageURL": self.imageURL
         ]
-        
-//        if let imageURL = imageURL {
-//            userData["imageURL"] = imageURL.absoluteString
-//        }
         
         userRef.setData(userData) { error in
             if let error = error {
@@ -82,7 +75,7 @@ class ProfileViewModel: ObservableObject {
                     if let phoneNumber = data["phone"] as? String {
                         self.phoneNumber = phoneNumber
                     }
-                    if let imageURLString = data["imageURL"] as? String, let imageURL = URL(string: imageURLString) {
+                    if let imageURLString = data["imageURL"] as? String, let _ = URL(string: imageURLString) {
                         self.imageURL = imageURLString
                     }
                 }

@@ -2,53 +2,75 @@
 import SwiftUI
 
 struct AddView: View {
-    //       @State  var id = ""
-    //       @State  var title = ""
-    //       @State  var content = ""
-    //       @State private var selectedCategoryIndex = 0
-    //       @State  var category: String = ""
-    //       @State  var tags = ""
     @State private var isShowingImagePicker = false
     @ObservedObject private var viewModel = AddViewModel()
+    
+    
     let categories = [ "News", "Sports","Health","Food"]
+
+    @State  var id: String
+    @State  var title: String
+    @State  var imageURL: String
+    @State  var content: String
+    @State  var category: String
+    @State  var tags: String
+    var edit: Bool
     
-    @State private var id: String
-    @State private var title: String
-    @State private var content: String
-    @State private var category: String = "News"
-    @State private var tags: String
-    
-    init(id: String, title: String, content: String, category: String, tags: String) {
-        self._id = State(initialValue: id)
-        self._title = State(initialValue: title)
-        self._content = State(initialValue: content)
-        self._category = State(initialValue: category)
-        self._tags = State(initialValue: tags)
-    }
-    
-    
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
                 ZStack{   ScrollView(showsIndicators: false) {
+                    
                     if let selectedImage = viewModel.selectedImage {
                         Image(uiImage: selectedImage)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 100)
                     } else {
-                        Button(action: {
-                            isShowingImagePicker = true
-                        }) {
-                            Text("Pick Image")
+                        if self.edit{
+                            AsyncImage(url: URL(string: viewModel.imageURL)) { phase in
+                                switch phase {
+                                case .empty:
+                                    Button(action: {
+                                        isShowingImagePicker = true
+                                    }) {
+                                        Text("Pick Image")
+                                    }
+                                    .padding()
+                                    .frame(maxWidth: .infinity)
+                                    .foregroundColor(.white)
+                                    .background(.black)
+                                    .cornerRadius(10)
+                                    .padding(.vertical,4)
+                                case .success(let image):
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(height: 100).frame(width: 120, height: 120)
+                                case .failure(_):
+                                    Text("Failed to load image")
+                                @unknown default:
+                                    ProgressView()
+                                           .frame(width: 120, height: 120)
+                                           .progressViewStyle(CircularProgressViewStyle())
+                                }
+                            }
+                            
+                        }else{
+                            Button(action: {
+                                isShowingImagePicker = true
+                            }) {
+                                Text("Pick Image")
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .foregroundColor(.white)
+                            .background(.black)
+                            .cornerRadius(10)
+                            .padding(.vertical,4)
                         }
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .foregroundColor(.white)
-                        .background(.black)
-                        .cornerRadius(10)
-                        .padding(.vertical,4)
                     }
                     
                     TextField("Title", text: $title)
@@ -85,23 +107,52 @@ struct AddView: View {
                             }
                         }
                         .padding()
-                        .navigationBarTitle("Add Article")
+                        .navigationBarTitle("Add Blog")
                         .navigationBarItems(trailing:
-                                                Button("Save") {
-                            viewModel.saveArticleToFirestore(title: title, content: content,category: category, tags: [tags])
-                        }
+                            Group {
+                                if self.edit {
+                                    HStack {
+                                        Button(action: {
+                                            viewModel.isDeleted = true
+                                        }) {
+                                            Text("Delete").foregroundColor(.red)
+                                        }.alert(isPresented: $viewModel.isDeleted) {
+                                            Alert(title: Text("Confirm Deletion"),
+                                                message: Text("Are you sure you want to delete ?"),
+                                                primaryButton: .destructive(Text("Delete")) {
+                                                viewModel.deleteBlogArticle(articleID: id)
+                                                dismiss()
+                                                },
+                                                secondaryButton: .cancel())
+                                        }
+                                        
+                                        Button(action: {
+                                            viewModel.updateBlogArticle(articleID: id, title: title, content: content, category: category, tags: [tags], imageURL: imageURL)
+                                        }) {
+                                            Text("Update")
+                                        }.alert(isPresented: self.viewModel.saved && !self.edit ? Binding.constant(true) : Binding.constant(false)) {
+                                            Alert(title: Text("Updated"), dismissButton: .default(Text("OK")))
+                                        }
+                                    }
+                                } else {
+                                    Button(action: {
+                                        viewModel.saveArticleToFirestore(title: title, content: content, category: category, tags: [tags])
+                                    }) {
+                                        Text("Save")
+                                    }.alert(isPresented: self.viewModel.saved && !self.edit ? Binding.constant(true) : Binding.constant(false)) {
+                                        Alert(title: Text("Saved"), dismissButton: .default(Text("OK")))
+                                    } 
+//                                    .alert(isPresented: $viewModel.alert) {
+//                                        Alert(title: Text("One or more required parameters are empty."), dismissButton:           .default(Text("OK")))
+//                                    }
+                                }
+                            }
                         )
                         .sheet(isPresented: $isShowingImagePicker) {
                             ImagePickerOR(image: $viewModel.selectedImage, id: id)
                         }
-                        .alert(isPresented: $viewModel.alert) {
-                            Alert(title: Text("One or more required parameters are empty."), dismissButton: .default(Text("OK")))
-                        }
                         .onChange(of: category) { cat in
                             print(cat)
-                        }
-                        .alert(isPresented: $viewModel.saved) {
-                            Alert(title: Text("Saved"), dismissButton: .default(Text("OK")))
                         }
                         .onChange(of: viewModel.saved) { saved in
                             if saved {
@@ -111,6 +162,9 @@ struct AddView: View {
                                 tags = ""
                                 viewModel.selectedImage = nil
                                 UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                                if self.edit {
+                                    dismiss()
+                                }
                             }
                         }
 
@@ -119,7 +173,7 @@ struct AddView: View {
                                 viewModel.uploadImage(image, id: viewModel.generateRandomUserID())
                             }
                         }
-                    }.navigationBarTitle("Add Blog", displayMode: .large)
+                    }
                 }
                 .tabItem {
                     Image(systemName: "plus.app.fill")

@@ -26,17 +26,33 @@ struct BlogsView: View {
                     } else {
                         VStack() {
                             ForEach(viewModel.filteredArticles) { article in
-                                ArticleView(article: article)
+                                ArticleView(article: article).onTapGesture{
+                                    viewModel.isLongPress = true
+                                    viewModel.selectedArticle = article
+                                }
+                               
                             }
                         }.padding(.top, 4)
                     }
                 }
-        }
+            }.sheet(isPresented: $viewModel.isLongPress) {
+                AddView(id: viewModel.selectedArticle!.id,
+                        title: viewModel.selectedArticle!.title,
+                        imageURL: viewModel.selectedArticle!.imageURL?.absoluteString ?? "",
+                        content: viewModel.selectedArticle!.content,
+                        category: viewModel.selectedArticle!.category,
+                        tags: "",edit: true)
+            }
         .onChange(of: viewModel.searchText) { _ in
             viewModel.filterArticles()
         }
         .onChange(of: viewModel.selectedCatIndex) { _ in
             viewModel.filterArticlesCatIndex()
+        }
+        .onChange(of: viewModel.isLongPress) { newValue in
+            guard !newValue else { return }
+            viewModel.getArticles()
+            viewModel.selectedCatIndex = 0
         }.navigationBarTitle("Blogs", displayMode: .large)
             }.tabItem {
                 Image(systemName: "house")

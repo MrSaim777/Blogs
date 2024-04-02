@@ -3,32 +3,21 @@ import SwiftUI
 import Firebase
 
 class BlogViewModel: ObservableObject {
-//    @Published  var selectedFilterIndex = 0
-//    @Published  var selectedCatIndex = 0
-//    @Published var articles: [Article] = []
-//    @Published var filteredArticles: [Article] = []
-//    @Published var searchText: String = ""
-//    // Add more properties as needed for user metadata, authentication, etc.
-//    let categoriesOptions = ["All", "News", "Sports","Health","Food"]
-//    let filterOptions = ["Title", "Auther", "Content"]
-//    let db = Firestore.firestore()
-//    let articleCollection = Firestore.firestore().collection("articles");
-//    @Published var isLoadingArticles = false
-//    
-//    init() {
-//        self.getArticles()
-//    }
     
     @Published var selectedFilterIndex = 0
       @Published var selectedCatIndex = 0
       @Published var articles: [Article] = []
       @Published var filteredArticles: [Article] = []
+      @Published var selectedArticle: Article?
       @Published var searchText: String = ""
+        @Published var isLoadingArticles = false
+        @Published var isLongPress = false
+    
       let categoriesOptions = ["All", "News", "Sports","Health","Food"]
       let filterOptions = ["Title", "Auther", "Content"]
       let db = Firestore.firestore()
       let articleCollection = Firestore.firestore().collection("articles")
-      @Published var isLoadingArticles = false
+     
       
       init(selectedFilterIndex: Int = 0,
            selectedCatIndex: Int = 0,
@@ -38,7 +27,7 @@ class BlogViewModel: ObservableObject {
            isLoadingArticles: Bool = false) {
           self.selectedFilterIndex = selectedFilterIndex
           self.selectedCatIndex = selectedCatIndex
-          self.articles = articles
+          self.selectedArticle = selectedArticle
           self.filteredArticles = filteredArticles
           self.searchText = searchText
           self.isLoadingArticles = isLoadingArticles
