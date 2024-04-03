@@ -5,6 +5,7 @@ struct ArticleView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
+            
             if let imageURL = article.imageURL {
                 AsyncImage(url: imageURL) { image in
                     image
@@ -27,6 +28,7 @@ struct ArticleView: View {
             Text(article.content)
                 .font(.body)
                 .foregroundColor(.secondary)
+            
             HStack {
                 ForEach(article.tags, id: \.self) { tag in
                     Text("#\(tag)")
@@ -37,7 +39,14 @@ struct ArticleView: View {
                         .foregroundColor(.white)
                         .cornerRadius(5)
                 }
+                
                 Spacer()
+                
+                Button(action: {
+                    // Handle edit action
+                }) {
+                    Text("Edit").foregroundColor(.black).bold()
+                }
             }
             .padding(.top, 4)
         }

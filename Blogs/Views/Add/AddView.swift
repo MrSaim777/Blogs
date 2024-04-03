@@ -21,7 +21,7 @@ struct AddView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 30) {
-                ZStack{   ScrollView(showsIndicators: false) {
+                ZStack{ScrollView(showsIndicators: false) {
                     
                     if let selectedImage = viewModel.selectedImage {
                         Image(uiImage: selectedImage)
@@ -93,13 +93,13 @@ struct AddView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     .padding(.vertical,4)
                     
-                    TextField("Tags (Optional)", text: $tags)
+                    TextField("Tag", text: $tags)
                         .padding()
                         .background(Color(UIColor.systemGray6))
                         .cornerRadius(10)
                         .padding(.vertical,4)
                             }
-                            if viewModel.isLoadingArticles{
+                            if viewModel.isLoadingArticles || viewModel.isUploadingImage{
                                 Spacer()
                                 ProgressView()
                                     .padding()

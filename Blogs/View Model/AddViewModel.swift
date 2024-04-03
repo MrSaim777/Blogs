@@ -8,6 +8,7 @@ class AddViewModel: ObservableObject{
     @Published var selectedImage: UIImage?
     @Published var imageURL: String = ""
     @Published var isLoadingArticles = false
+    @Published var isUploadingImage = false
     @Published var alert = false
     @Published var saved = false
     @Published var deleted = false
@@ -23,6 +24,7 @@ class AddViewModel: ObservableObject{
     }
     
     func uploadImage(_ image: UIImage, id: String) {
+        self.isUploadingImage = true
         guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
         let storage = Storage.storage()
         let storageRef = storage.reference()
@@ -34,6 +36,7 @@ class AddViewModel: ObservableObject{
         let uploadTask = imageRef.putData(imageData, metadata: metadata)
 
         uploadTask.observe(.success) { snapshot in
+            self.isUploadingImage = false
             imageRef.downloadURL { (url, error) in
                 if let error = error {
                     print("Error getting download URL: \(error)")
