@@ -13,6 +13,7 @@ class ProfileViewModel: ObservableObject {
     @Published var profileImage: UIImage? = nil
     @Published var showAlert = false
     @Published var isFetchingData = false
+    @Published var profileCredentials = false
     
     init(id: String = "", username: String = "", email: String = "", phoneNumber: String = "", profileImage: UIImage? = nil, showAlert: Bool = false) {
         self.id = self.getUID()
@@ -45,14 +46,20 @@ class ProfileViewModel: ObservableObject {
             "imageURL": self.imageURL
         ]
         
-        userRef.setData(userData) { error in
-            if let error = error {
-                print("Error adding user to Firestore: \(error)")
-            } else {
-                self.showAlert = true
-                print("User added to Firestore successfully")
+        if self.username.isEmpty || self.email.isEmpty || self.phoneNumber.isEmpty{
+            self.profileCredentials = true
+        }else{
+            self.profileCredentials = false
+            userRef.setData(userData) { error in
+                if let error = error {
+                    print("Error adding user to Firestore: \(error)")
+                } else {
+                    self.showAlert = true
+                    print("User added to Firestore successfully")
+                }
             }
         }
+        
     }
     
     func retrieveUserDataFromFirestore() {

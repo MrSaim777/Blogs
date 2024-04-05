@@ -10,8 +10,15 @@ class BlogViewModel: ObservableObject {
       @Published var filteredArticles: [Article] = []
       @Published var selectedArticle: Article?
       @Published var searchText: String = ""
-        @Published var isLoadingArticles = false
-        @Published var isLongPress = false
+      @Published var isLoadingArticles = false
+      @Published var isLongPress = false
+      @Published var showNextButton = true
+      @Published var showPrevButton = false
+      @Published var startIndex = 0
+      var endIndex: Int {
+          let endIndexCandidate = min(startIndex + 5, filteredArticles.count)
+          return max(startIndex, endIndexCandidate)
+        }
     
       let categoriesOptions = ["All", "News", "Sports","Health","Food"]
       let filterOptions = ["Title", "Auther", "Content"]
@@ -36,6 +43,8 @@ class BlogViewModel: ObservableObject {
     
     func getArticles() {
             isLoadingArticles = true
+            self.articles = []
+            self.filteredArticles = []
             articleCollection.getDocuments { [weak self] snapshot, error in
                 guard let self = self else { return }
                 defer {

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ArticleView: View {
     var article: Article
+    var function: () -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -43,7 +44,7 @@ struct ArticleView: View {
                 Spacer()
                 
                 Button(action: {
-                    // Handle edit action
+                    self.function()
                 }) {
                     Text("Edit").foregroundColor(.black).bold()
                 }

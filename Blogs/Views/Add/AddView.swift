@@ -74,16 +74,11 @@ struct AddView: View {
                     }
                     
                     TextField("Title", text: $title)
-                        .padding()
-                        .background(Color(UIColor.systemGray6))
-                        .cornerRadius(10)
-                        .padding(.vertical,4)
+                        .textFieldStyle(CustomRoundedTextFieldStyle())
                     
-                    TextField("Content", text: $content)
-                        .padding()
-                        .background(Color(UIColor.systemGray6))
-                        .cornerRadius(10)
-                        .padding(.vertical, 4)
+                    TextField("Content", text: $content,axis: .vertical)
+                        .textFieldStyle(CustomRoundedTextFieldStyle())
+                        .lineLimit(5)
                     
                     Picker(selection: $category, label: Text("Category")) {
                         ForEach(categories, id: \.self) {
@@ -94,17 +89,15 @@ struct AddView: View {
                     .padding(.vertical,4)
                     
                     TextField("Tag", text: $tags)
-                        .padding()
-                        .background(Color(UIColor.systemGray6))
-                        .cornerRadius(10)
-                        .padding(.vertical,4)
-                            }
-                            if viewModel.isLoadingArticles || viewModel.isUploadingImage{
-                                Spacer()
-                                ProgressView()
-                                    .padding()
-                                Spacer()
-                            }
+                        .textFieldStyle(CustomRoundedTextFieldStyle())
+                    }
+                        if viewModel.isLoadingArticles || viewModel.isUploadingImage{
+                            Spacer()
+                            ProgressView()
+                                .padding()
+                            Spacer()
+                        }
+                    
                         }
                         .padding()
                         .navigationBarTitle("Add Blog")
@@ -181,6 +174,17 @@ struct AddView: View {
                 }
         }
     }
+
+struct CustomRoundedTextFieldStyle: TextFieldStyle {
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .padding()
+            .background(Color(UIColor.systemGray6))
+            .cornerRadius(10)
+            .padding(.vertical, 4)
+    }
+}
+
 
 //#Preview {
 //    AddView()

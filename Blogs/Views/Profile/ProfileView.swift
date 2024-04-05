@@ -51,7 +51,11 @@ struct ProfileView: View {
                                             .shadow(radius: 10)
                                     case .failure(_):
                                         // Error view
-                                        Text("Failed to load image")
+                                        Image(systemName: "person.circle.fill")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 120, height: 120)
+                                            .foregroundColor(.gray)
                                     @unknown default:
                                         // Placeholder view
                                         Image(systemName: "person.circle.fill")
@@ -76,21 +80,6 @@ struct ProfileView: View {
                     .cornerRadius(8)
                     .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 2)
                     .modifier(FormHiddenBackground())
-//                    TextField("Username", text:$viewModel.username)
-//                    .padding(.horizontal)
-//                    .padding(.vertical, 8)
-//                        .background(Color(UIColor.systemGray6))
-//                        .cornerRadius(10)
-//                    TextField("Email", text: $viewModel.email)
-//                    .padding(.horizontal)
-//                    .padding(.vertical, 8)
-//                        .background(Color(UIColor.systemGray6))
-//                        .cornerRadius(10)
-//                    TextField("Phone Number", text: $viewModel.phoneNumber)
-//                    .padding(.horizontal)
-//                    .padding(.vertical, 8)
-//                        .background(Color(UIColor.systemGray6))
-//                        .cornerRadius(10)
                 Spacer()
                 }
             }
@@ -100,6 +89,8 @@ struct ProfileView: View {
                 viewModel.addUserToFirestore()
                 }) {
                     Text("Save")
+                }.alert(isPresented: $viewModel.profileCredentials) {
+                    Alert(title: Text("One or more required parameters are empty."), dismissButton: .default(Text("OK")))
                 }
             )
             .sheet(isPresented: $isShowingImagePicker) {
